@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ photo.title }}</h1>
+    <img class="photo" src="{{ photo.image_url }}" alt="{{ photo.title }}">
+    <p>{{ photo.description }}</p>
+    <p><strong>Tags:</strong> {{ photo.tags }}</p>
+    <p>Likes: {{ photo.likes }} | Dislikes: {{ photo.dislikes }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="action" value="like">Like</button>
+        <button type="submit" name="action" value="dislike">Dislike</button>
+    </form>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+{% endblock %}

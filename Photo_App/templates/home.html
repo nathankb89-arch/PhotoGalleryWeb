@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Welcome to the Photo Gallery</h1>
+    <p>This page shows a few photos and tags.</p>
+
+    <form method="get">
+        <input type="text" name="tag" placeholder="Search by tag" value="{{ tag }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% for photo in photos %}
+        <div class="card">
+            <h2>{{ photo.title }}</h2>
+            <p>{{ photo.description }}</p>
+            <img class="photo" src="{{ photo.image_url }}" alt="{{ photo.title }}">
+            <p><strong>Tags:</strong> {{ photo.tags }}</p>
+            <p>Likes: {{ photo.likes }} | Dislikes: {{ photo.dislikes }}</p>
+            <a href="{% url 'photo_detail' photo.id %}">View More</a>
+        </div>
+    {% empty %}
+        <p>No photos yet.</p>
+    {% endfor %}
+{% endblock %}
